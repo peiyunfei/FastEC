@@ -2,7 +2,9 @@ package com.pyf.fastec;
 
 import android.app.Application;
 
+import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.pyf.latte.app.Latte;
+import com.pyf.latte.ec.icon.FontEcModule;
 
 /**
  * 全局应用程序类
@@ -25,7 +27,13 @@ public class AppContext extends Application {
      */
     private void init() {
         Latte.init(this)
+                // 初始化访问网络的域名
                 .withApiHost("")
+                // 初始化阿里巴巴矢量字体图标库
+                .withIcon(new FontEcModule())
+                // 初始化字体图标库
+                .withIcon(new FontAwesomeModule())
+                // 初始化完成
                 .configure();
     }
 }

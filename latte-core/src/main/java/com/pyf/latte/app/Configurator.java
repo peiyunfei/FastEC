@@ -1,6 +1,11 @@
 package com.pyf.latte.app;
 
-import java.util.WeakHashMap;
+import com.joanzapata.iconify.IconFontDescriptor;
+import com.joanzapata.iconify.Iconify;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * 配置信息的存储和获取，使用静态内部类实现单例模式
@@ -12,7 +17,9 @@ import java.util.WeakHashMap;
 public class Configurator {
 
     // 用于存储和获取配置信息的集合
-    private static final WeakHashMap<Object, Object> LATTE_CONFIGS = new WeakHashMap<>();
+    private static final HashMap<Object, Object> LATTE_CONFIGS = new HashMap<>();
+    // 存储字体图标库的集合
+    private static final List<IconFontDescriptor> ICONS = new ArrayList<>();
 
     private Configurator() {
         // 默认情况下初始化还没有完成，将value值设置为false
@@ -35,7 +42,7 @@ public class Configurator {
         private static final Configurator INSTANCE = new Configurator();
     }
 
-    public final WeakHashMap<Object, Object> getLatteConfigs() {
+    public final HashMap<Object, Object> getLatteConfigs() {
         return LATTE_CONFIGS;
     }
 
@@ -43,6 +50,8 @@ public class Configurator {
      * 初始化完成
      */
     public final void configure() {
+        // 初始化字体图标库
+        initIcons();
         // 初始化完成，将value值设置为true
         LATTE_CONFIGS.put(ConfigType.APPLICATION_CONTEXT.name(), true);
     }
@@ -60,12 +69,36 @@ public class Configurator {
     }
 
     /**
+     * 添加字体图标库
+     *
+     * @param descriptor
+     *         体图标库
+     * @return 本类唯一实例
+     */
+    public final Configurator withIcon(IconFontDescriptor descriptor) {
+        ICONS.add(descriptor);
+        return this;
+    }
+
+    /**
      * 判断是否初始化完成
      *
      * @return true 初始化完成。 false 初始化还没有完成
      */
     private boolean checkConfigurator() {
         return (boolean) LATTE_CONFIGS.get(ConfigType.CONFIG_READY.name());
+    }
+
+    /**
+     * 初始化字体图标库
+     */
+    private void initIcons() {
+        if (ICONS.size() > 0) {
+            Iconify.IconifyInitializer initializer = Iconify.with(ICONS.get(0));
+            for (int i = 1; i < ICONS.size(); i++) {
+                initializer.with(ICONS.get(i));
+            }
+        }
     }
 
     /**
