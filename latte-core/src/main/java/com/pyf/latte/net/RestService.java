@@ -100,5 +100,5 @@ public interface RestService {
      */
     @Multipart
     @POST
-    Call<String> upload(@Url String url, @Part MultipartBody file);
+    Call<String> upload(@Url String url, @Part MultipartBody.Part file);
 }
