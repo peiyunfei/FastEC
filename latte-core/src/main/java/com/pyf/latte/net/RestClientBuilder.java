@@ -8,6 +8,7 @@ import com.pyf.latte.net.callback.IRequest;
 import com.pyf.latte.net.callback.ISuccess;
 import com.pyf.latte.ui.loader.LoaderStyle;
 
+import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -31,6 +32,7 @@ public class RestClientBuilder {
     private RequestBody mBody;
     private Context mContext;
     private LoaderStyle mLoaderStyle;
+    private File mFile;
 
     RestClientBuilder() {
         mParams = RestCreator.getParams();
@@ -88,8 +90,32 @@ public class RestClientBuilder {
         return this;
     }
 
+    public final RestClientBuilder file(File file) {
+        this.mFile = file;
+        return this;
+    }
+
+    public final RestClientBuilder file(String file) {
+        mFile = new File(file);
+        return this;
+    }
+
+    public final RestClientBuilder file(File dir, String fileName) {
+        mFile = new File(dir, fileName);
+        return this;
+    }
+
     public RestClient build() {
-        return new RestClient(mUrl, mParams, mIError, mIFailure,
-                mISuccess, mIRequest, mBody, mContext, mLoaderStyle);
+        return new RestClient(
+                mUrl,
+                mParams,
+                mIError,
+                mIFailure,
+                mISuccess,
+                mIRequest,
+                mBody,
+                mContext,
+                mLoaderStyle,
+                mFile);
     }
 }

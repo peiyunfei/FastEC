@@ -10,9 +10,12 @@ import com.pyf.latte.net.callback.RequestCallBacks;
 import com.pyf.latte.ui.loader.LatterLoader;
 import com.pyf.latte.ui.loader.LoaderStyle;
 
+import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,6 +38,7 @@ public class RestClient {
     private final RequestBody BODY;
     private final Context CONTEXT;
     private final LoaderStyle LOADER_STYLE;
+    private final File FILE;
 
     public RestClient(String url,
                       Map<String, Object> params,
@@ -44,7 +48,8 @@ public class RestClient {
                       IRequest iRequest,
                       RequestBody body,
                       Context context,
-                      LoaderStyle loaderStyle) {
+                      LoaderStyle loaderStyle,
+                      File file) {
         this.URL = url;
         this.PARAMS.putAll(params);
         this.ERROR = iError;
@@ -54,6 +59,7 @@ public class RestClient {
         this.BODY = body;
         this.CONTEXT = context;
         this.LOADER_STYLE = loaderStyle;
+        this.FILE = file;
     }
 
     public static RestClientBuilder builder() {
@@ -98,6 +104,11 @@ public class RestClient {
                 call = restService.putRaw(URL, BODY);
                 break;
             case UPLOAD:
+                RequestBody requestBody =
+                        RequestBody.create(MediaType.parse(MultipartBody.FORM.toString()), FILE);
+                final MultipartBody.Part body =
+                        MultipartBody.Part.createFormData("file", FILE.getName(), requestBody);
+                call = restService.upload(URL, body);
                 break;
         }
         // 执行请求
@@ -124,14 +135,28 @@ public class RestClient {
      * post请求
      */
     public final void post() {
-        request(HttpMethod.POST);
+        if (BODY == null) {
+            request(HttpMethod.POST);
+        } else {
+            if (!PARAMS.isEmpty()) {
+                throw new RuntimeException("params must be empty");
+            }
+            request(HttpMethod.POST_RAW);
+        }
     }
 
     /**
      * put请求
      */
     public final void put() {
-        request(HttpMethod.PUT);
+        if (BODY == null) {
+            request(HttpMethod.PUT);
+        } else {
+            if (!PARAMS.isEmpty()) {
+                throw new RuntimeException("params must be empty");
+            }
+            request(HttpMethod.PUT_RAW);
+        }
     }
 
     /**
