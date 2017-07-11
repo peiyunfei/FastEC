@@ -2,6 +2,7 @@ package com.pyf.latte.net.callback;
 
 import android.os.Handler;
 
+import com.pyf.latte.net.RestCreator;
 import com.pyf.latte.ui.loader.LatterLoader;
 import com.pyf.latte.ui.loader.LoaderStyle;
 
@@ -15,13 +16,12 @@ import retrofit2.Response;
  * <br/>
  * 时间：2017/7/11
  */
-
 public class RequestCallBacks implements Callback<String> {
 
-    private final IError ERROR;
-    private final IFailure FAILURE;
-    private final ISuccess SUCCESS;
-    private final IRequest REQUEST;
+    private final IError IERROR;
+    private final IFailure IFAILURE;
+    private final ISuccess ISUCCESS;
+    private final IRequest IREQUEST;
     private final LoaderStyle LOADER_STYLE;
     private static Handler mHandler = new Handler();
 
@@ -30,10 +30,10 @@ public class RequestCallBacks implements Callback<String> {
                             ISuccess iSuccess,
                             IRequest iRequest,
                             LoaderStyle loaderStyle) {
-        this.ERROR = iError;
-        this.FAILURE = iFailure;
-        this.SUCCESS = iSuccess;
-        this.REQUEST = iRequest;
+        this.IERROR = iError;
+        this.IFAILURE = iFailure;
+        this.ISUCCESS = iSuccess;
+        this.IREQUEST = iRequest;
         this.LOADER_STYLE = loaderStyle;
     }
 
@@ -41,28 +41,28 @@ public class RequestCallBacks implements Callback<String> {
     public void onResponse(Call<String> call, Response<String> response) {
         if (response.isSuccessful()) {
             if (call.isExecuted()) {
-                if (SUCCESS != null) {
-                    SUCCESS.onSuccess(response.body());
+                if (ISUCCESS != null) {
+                    ISUCCESS.onSuccess(response.body());
                 }
             }
         } else {
-            if (ERROR != null) {
-                ERROR.onError(response.code(), response.message());
+            if (IERROR != null) {
+                IERROR.onError(response.code(), response.message());
             }
         }
-        if (REQUEST != null) {
-            REQUEST.onRequestEnd();
+        if (IREQUEST != null) {
+            IREQUEST.onRequestEnd();
         }
         onRequestFinish();
     }
 
     @Override
     public void onFailure(Call<String> call, Throwable t) {
-        if (FAILURE != null) {
-            FAILURE.onFailure();
+        if (IFAILURE != null) {
+            IFAILURE.onFailure();
         }
-        if (REQUEST != null) {
-            REQUEST.onRequestEnd();
+        if (IREQUEST != null) {
+            IREQUEST.onRequestEnd();
         }
         onRequestFinish();
     }
@@ -72,6 +72,7 @@ public class RequestCallBacks implements Callback<String> {
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    RestCreator.getParams().clear();
                     LatterLoader.stopLoading();
                 }
             }, 1000);

@@ -2,6 +2,7 @@ package com.pyf.latte.net;
 
 import android.content.Context;
 
+import com.pyf.latte.download.DownloadHandler;
 import com.pyf.latte.net.callback.IError;
 import com.pyf.latte.net.callback.IFailure;
 import com.pyf.latte.net.callback.IRequest;
@@ -29,18 +30,37 @@ import retrofit2.Callback;
  */
 public class RestClient {
 
+    // 网络访问地址
     private final String URL;
+    // 文件下载路径
+    private final String DOWNLOAD_DIR;
+    // 文件扩展名
+    private final String EXTENSION;
+    // 文件名
+    private final String NAME;
+    // 存储请求参数的集合
     private final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
-    private final IError ERROR;
-    private final IFailure FAILURE;
-    private final ISuccess SUCCESS;
-    private final IRequest REQUEST;
+    // 请求错误
+    private final IError IERROR;
+    // 请求失败
+    private final IFailure IFAILURE;
+    // 请求成功
+    private final ISuccess ISUCCESS;
+    // 开始访问网络和结束访问网络
+    private final IRequest IREQUEST;
+    // 请求体
     private final RequestBody BODY;
+    // 上下文
     private final Context CONTEXT;
+    // 加载进度条的样式
     private final LoaderStyle LOADER_STYLE;
+    // 文件
     private final File FILE;
 
     public RestClient(String url,
+                      String downloadDir,
+                      String extension,
+                      String name,
                       Map<String, Object> params,
                       IError iError,
                       IFailure iFailure,
@@ -51,11 +71,14 @@ public class RestClient {
                       LoaderStyle loaderStyle,
                       File file) {
         this.URL = url;
+        this.DOWNLOAD_DIR = downloadDir;
+        this.EXTENSION = extension;
+        this.NAME = name;
         this.PARAMS.putAll(params);
-        this.ERROR = iError;
-        this.FAILURE = iFailure;
-        this.SUCCESS = iSuccess;
-        this.REQUEST = iRequest;
+        this.IERROR = iError;
+        this.IFAILURE = iFailure;
+        this.ISUCCESS = iSuccess;
+        this.IREQUEST = iRequest;
         this.BODY = body;
         this.CONTEXT = context;
         this.LOADER_STYLE = loaderStyle;
@@ -74,9 +97,9 @@ public class RestClient {
      */
     private void request(HttpMethod method) {
         RestService restService = RestCreator.getRestService();
-        if (REQUEST != null) {
+        if (IREQUEST != null) {
             // 开始网络请求
-            REQUEST.onRequestStart();
+            IREQUEST.onRequestStart();
         }
         if (LOADER_STYLE != null) {
             // 显示进度条
@@ -110,6 +133,8 @@ public class RestClient {
                         MultipartBody.Part.createFormData("file", FILE.getName(), requestBody);
                 call = restService.upload(URL, body);
                 break;
+            default:
+                break;
         }
         // 执行请求
         call.enqueue(getRequestCallBacks());
@@ -117,10 +142,10 @@ public class RestClient {
 
     private Callback<String> getRequestCallBacks() {
         return new RequestCallBacks(
-                ERROR,
-                FAILURE,
-                SUCCESS,
-                REQUEST,
+                IERROR,
+                IFAILURE,
+                ISUCCESS,
+                IREQUEST,
                 LOADER_STYLE);
     }
 
@@ -171,5 +196,13 @@ public class RestClient {
      */
     public final void upload() {
         request(HttpMethod.UPLOAD);
+    }
+
+    /**
+     * 下载文件
+     */
+    public final void download() {
+        new DownloadHandler(URL, DOWNLOAD_DIR, EXTENSION, NAME,
+                IERROR, IFAILURE, ISUCCESS, IREQUEST).handlerDownload();
     }
 }
