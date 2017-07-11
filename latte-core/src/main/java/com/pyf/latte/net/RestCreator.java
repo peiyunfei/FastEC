@@ -3,6 +3,7 @@ package com.pyf.latte.net;
 import com.pyf.latte.app.ConfigType;
 import com.pyf.latte.app.Latte;
 
+import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -27,13 +28,21 @@ public class RestCreator {
         return RestServiceHolder.REST_SERVICE;
     }
 
+    public static WeakHashMap<String, Object> getParams() {
+        return ParamsHolder.PARAMS;
+    }
+
+    private static final class ParamsHolder {
+        private static final WeakHashMap<String, Object> PARAMS = new WeakHashMap<>();
+    }
+
     /**
      * 创建retrofit实例
      */
     private static final class RetrofitHolder {
         private static final String BASE_URL =
                 (String) Latte.getConfigurator().getLatteConfigs().get(ConfigType.API_HOST.name());
-        private static final Retrofit RETROFIT_CLENT = new Retrofit.Builder()
+        private static final Retrofit RETROFIT_CLIENT = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .client(OkHttpHolder.OKHTTP_CLIENT)
@@ -55,6 +64,6 @@ public class RestCreator {
      */
     private static final class RestServiceHolder {
         private static final RestService REST_SERVICE =
-                RetrofitHolder.RETROFIT_CLENT.create(RestService.class);
+                RetrofitHolder.RETROFIT_CLIENT.create(RestService.class);
     }
 }

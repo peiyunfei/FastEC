@@ -28,7 +28,7 @@ public class AppContext extends Application {
     private void init() {
         Latte.init(this)
                 // 初始化访问网络的域名
-                .withApiHost("")
+                .withApiHost("http://127.0.0.1/")
                 // 初始化阿里巴巴矢量字体图标库
                 .withIcon(new FontEcModule())
                 // 初始化字体图标库
