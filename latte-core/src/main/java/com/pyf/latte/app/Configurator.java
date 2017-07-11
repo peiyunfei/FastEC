@@ -53,7 +53,7 @@ public class Configurator {
         // 初始化字体图标库
         initIcons();
         // 初始化完成，将value值设置为true
-        LATTE_CONFIGS.put(ConfigType.APPLICATION_CONTEXT.name(), true);
+        LATTE_CONFIGS.put(ConfigType.CONFIG_READY.name(), true);
     }
 
     /**

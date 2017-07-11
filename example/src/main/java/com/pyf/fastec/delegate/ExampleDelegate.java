@@ -2,7 +2,6 @@ package com.pyf.fastec.delegate;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.pyf.fastec.R;
 import com.pyf.latte.delegate.LatteDelegate;
@@ -48,9 +47,10 @@ public class ExampleDelegate extends LatteDelegate {
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-                        Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
                     }
                 })
+                .loader(getContext())
                 .build()
                 .get();
     }

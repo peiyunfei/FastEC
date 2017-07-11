@@ -1,9 +1,12 @@
 package com.pyf.latte.net;
 
+import android.content.Context;
+
 import com.pyf.latte.net.callback.IError;
 import com.pyf.latte.net.callback.IFailure;
 import com.pyf.latte.net.callback.IRequest;
 import com.pyf.latte.net.callback.ISuccess;
+import com.pyf.latte.ui.loader.LoaderStyle;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -26,6 +29,8 @@ public class RestClientBuilder {
     private ISuccess mISuccess;
     private IRequest mIRequest;
     private RequestBody mBody;
+    private Context mContext;
+    private LoaderStyle mLoaderStyle;
 
     RestClientBuilder() {
         mParams = RestCreator.getParams();
@@ -71,7 +76,20 @@ public class RestClientBuilder {
         return this;
     }
 
+    public final RestClientBuilder loader(Context context, LoaderStyle loaderStyle) {
+        mContext = context;
+        mLoaderStyle = loaderStyle;
+        return this;
+    }
+
+    public final RestClientBuilder loader(Context context) {
+        mContext = context;
+        mLoaderStyle = LoaderStyle.BallClipRotatePulseIndicator;
+        return this;
+    }
+
     public RestClient build() {
-        return new RestClient(mUrl, mParams, mIError, mIFailure, mISuccess, mIRequest, mBody);
+        return new RestClient(mUrl, mParams, mIError, mIFailure,
+                mISuccess, mIRequest, mBody, mContext, mLoaderStyle);
     }
 }

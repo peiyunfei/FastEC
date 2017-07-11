@@ -1,10 +1,14 @@
 package com.pyf.latte.net;
 
+import android.content.Context;
+
 import com.pyf.latte.net.callback.IError;
 import com.pyf.latte.net.callback.IFailure;
 import com.pyf.latte.net.callback.IRequest;
 import com.pyf.latte.net.callback.ISuccess;
 import com.pyf.latte.net.callback.RequestCallBacks;
+import com.pyf.latte.ui.loader.LatterLoader;
+import com.pyf.latte.ui.loader.LoaderStyle;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -29,6 +33,8 @@ public class RestClient {
     private final ISuccess SUCCESS;
     private final IRequest REQUEST;
     private final RequestBody BODY;
+    private final Context CONTEXT;
+    private final LoaderStyle LOADER_STYLE;
 
     public RestClient(String url,
                       Map<String, Object> params,
@@ -36,7 +42,9 @@ public class RestClient {
                       IFailure iFailure,
                       ISuccess iSuccess,
                       IRequest iRequest,
-                      RequestBody body) {
+                      RequestBody body,
+                      Context context,
+                      LoaderStyle loaderStyle) {
         this.URL = url;
         this.PARAMS.putAll(params);
         this.ERROR = iError;
@@ -44,14 +52,30 @@ public class RestClient {
         this.SUCCESS = iSuccess;
         this.REQUEST = iRequest;
         this.BODY = body;
+        this.CONTEXT = context;
+        this.LOADER_STYLE = loaderStyle;
     }
 
     public static RestClientBuilder builder() {
         return new RestClientBuilder();
     }
 
+    /**
+     * 发送网络请求
+     *
+     * @param method
+     *         请求方法
+     */
     private void request(HttpMethod method) {
         RestService restService = RestCreator.getRestService();
+        if (REQUEST != null) {
+            // 开始网络请求
+            REQUEST.onRequestStart();
+        }
+        if (LOADER_STYLE != null) {
+            // 显示进度条
+            LatterLoader.showLoading(CONTEXT, LOADER_STYLE);
+        }
         Call<String> call = null;
         // 创建请求
         switch (method) {
@@ -81,7 +105,12 @@ public class RestClient {
     }
 
     private Callback<String> getRequestCallBacks() {
-        return new RequestCallBacks(ERROR, FAILURE, SUCCESS, REQUEST);
+        return new RequestCallBacks(
+                ERROR,
+                FAILURE,
+                SUCCESS,
+                REQUEST,
+                LOADER_STYLE);
     }
 
     /**
