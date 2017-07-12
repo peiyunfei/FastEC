@@ -2,6 +2,7 @@ package com.pyf.fastec.delegate;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.pyf.fastec.R;
 import com.pyf.latte.delegate.LatteDelegate;
@@ -31,7 +32,7 @@ public class ExampleDelegate extends LatteDelegate {
 
     private void testRestClient() {
         RestClient.builder()
-                .url("http://news.baidu.com/")
+                .url("http://127.0.0.1/index")
                 .error(new IError() {
                     @Override
                     public void onError(int code, String msg) {
@@ -47,7 +48,7 @@ public class ExampleDelegate extends LatteDelegate {
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-//                        Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
                     }
                 })
                 .loader(getContext())

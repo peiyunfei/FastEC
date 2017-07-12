@@ -5,6 +5,7 @@ import android.app.Application;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.pyf.latte.app.Latte;
 import com.pyf.latte.ec.icon.FontEcModule;
+import com.pyf.latte.net.interceptors.DebugInterceptor;
 
 /**
  * 全局应用程序类
@@ -33,6 +34,10 @@ public class AppContext extends Application {
                 .withIcon(new FontEcModule())
                 // 初始化字体图标库
                 .withIcon(new FontAwesomeModule())
+                // 初始化延迟加载时间
+                .withLoaderDelayed(1000)
+                // 初始化测试拦截器
+                .withInterceptor(new DebugInterceptor("index",R.raw.test))
                 // 初始化完成
                 .configure();
     }

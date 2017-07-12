@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import okhttp3.Interceptor;
+
 /**
  * 配置信息的存储和获取，使用静态内部类实现单例模式
  * <br/>
@@ -20,6 +22,8 @@ public class Configurator {
     private static final HashMap<Object, Object> LATTE_CONFIGS = new HashMap<>();
     // 存储字体图标库的集合
     private static final List<IconFontDescriptor> ICONS = new ArrayList<>();
+    // 存储拦截器的集合
+    private static final List<Interceptor> INTERCEPTORS = new ArrayList<>();
 
     private Configurator() {
         // 默认情况下初始化还没有完成，将value值设置为false
@@ -81,6 +85,44 @@ public class Configurator {
     }
 
     /**
+     * 添加拦截器
+     *
+     * @param interceptor
+     *         拦截器
+     * @return 本类唯一实例
+     */
+    public final Configurator withInterceptor(Interceptor interceptor) {
+        INTERCEPTORS.add(interceptor);
+        LATTE_CONFIGS.put(ConfigType.INTERCEPTOR, INTERCEPTORS);
+        return this;
+    }
+
+    /**
+     * 添加拦截器
+     *
+     * @param interceptors
+     *         拦截器集合
+     * @return 本类唯一实例
+     */
+    public final Configurator withInterceptors(ArrayList<Interceptor> interceptors) {
+        INTERCEPTORS.addAll(interceptors);
+        LATTE_CONFIGS.put(ConfigType.INTERCEPTOR, INTERCEPTORS);
+        return this;
+    }
+
+    /**
+     * 初始化延迟加载时间
+     *
+     * @param delayed
+     *         延迟加载时间
+     * @return 本类唯一实例
+     */
+    public final Configurator withLoaderDelayed(long delayed) {
+        LATTE_CONFIGS.put(ConfigType.LOADER_DELAYED, delayed);
+        return this;
+    }
+
+    /**
      * 判断是否初始化完成
      *
      * @return true 初始化完成。 false 初始化还没有完成
@@ -111,7 +153,7 @@ public class Configurator {
      * @return 对应的配置信息
      */
     @SuppressWarnings("unchecked")
-    public final <T> T getConfiguration(String key) {
+    public final <T> T getConfiguration(Object key) {
         if (!checkConfigurator()) {
             throw new RuntimeException("Configuration is not ready, please call configure() method");
         }

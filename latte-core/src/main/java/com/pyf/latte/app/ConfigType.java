@@ -15,6 +15,10 @@ public enum ConfigType {
     // 是否初始化完成
     CONFIG_READY,
     // 字体
-    ICON
+    ICON,
+    // 延迟加载
+    LOADER_DELAYED,
+    // 拦截器
+    INTERCEPTOR
 
 }
