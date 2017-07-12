@@ -8,7 +8,7 @@ import android.text.TextUtils;
 import com.pyf.latte.app.Latte;
 import com.pyf.latte.net.callback.IRequest;
 import com.pyf.latte.net.callback.ISuccess;
-import com.pyf.latte.utils.FileUtil;
+import com.pyf.latte.utils.file.FileUtil;
 
 import java.io.File;
 import java.io.InputStream;

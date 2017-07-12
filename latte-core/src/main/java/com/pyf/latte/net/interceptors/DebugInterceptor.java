@@ -1,6 +1,6 @@
 package com.pyf.latte.net.interceptors;
 
-import com.pyf.latte.utils.FileUtil;
+import com.pyf.latte.utils.file.FileUtil;
 
 import java.io.IOException;
 

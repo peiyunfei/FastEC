@@ -1,4 +1,4 @@
-package com.pyf.latte.utils;
+package com.pyf.latte.utils.dimen;
 
 import android.content.Context;
 import android.util.DisplayMetrics;

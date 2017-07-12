@@ -1,8 +1,8 @@
 package com.pyf.fastec.activity;
 
-import com.pyf.fastec.delegate.ExampleDelegate;
 import com.pyf.latte.activity.ProxyActivity;
 import com.pyf.latte.delegate.LatteDelegate;
+import com.pyf.latte.ec.launcher.LauncherDelegate;
 
 /**
  * 用于测试框架的activity
@@ -15,6 +15,6 @@ public class ExampleActivity extends ProxyActivity {
 
     @Override
     public LatteDelegate setRootDelegate() {
-        return new ExampleDelegate();
+        return new LauncherDelegate();
     }
 }
