@@ -1,12 +1,17 @@
 package com.pyf.latte.ec.launcher;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
+import com.pyf.latte.app.AccountManager;
+import com.pyf.latte.app.IUserCheck;
 import com.pyf.latte.delegate.LatteDelegate;
 import com.pyf.latte.ec.R;
 import com.pyf.latte.ec.R2;
+import com.pyf.latte.ui.launcher.ILauncherListener;
+import com.pyf.latte.ui.launcher.OnLauncherFinishTag;
 import com.pyf.latte.ui.launcher.ScrollLauncherTag;
 import com.pyf.latte.utils.storage.LattePreference;
 import com.pyf.latte.utils.timer.BaseTimerTask;
@@ -34,6 +39,17 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
     private Timer mTimer;
     // 倒计时5秒
     private int mCount = 5;
+
+    // 启动监听
+    private ILauncherListener mILauncherListener;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ILauncherListener) {
+            mILauncherListener = (ILauncherListener) activity;
+        }
+    }
 
     /**
      * 为倒计时按钮添加事件
@@ -67,14 +83,32 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
     }
 
     /**
-     * 检查是否进入轮播图界面
+     * 检查是否进入滑动启动界面
      */
     private void checkIsShowScroll() {
         boolean flag = LattePreference.getAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name());
+        // 不是第一次进入应用
         if (!flag) {
             start(new LauncherScrollDelegate(), SINGLETASK);
         } else {
-            // todo 创建用户是否登录
+            // 判断是否登录
+            AccountManager.checkAccount(new IUserCheck() {
+                @Override
+                public void onSignIn() {
+                    if (mILauncherListener != null) {
+                        // 已经登录
+                        mILauncherListener.onLauncherFinish(OnLauncherFinishTag.SIGNED);
+                    }
+                }
+
+                @Override
+                public void onNotSignIn() {
+                    if (mILauncherListener != null) {
+                        // 没有登录
+                        mILauncherListener.onLauncherFinish(OnLauncherFinishTag.NOT_SIGNED);
+                    }
+                }
+            });
         }
     }
 
@@ -90,7 +124,10 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
                 // 倒计时减一
                 mCount--;
                 if (mCount < 0) {
+                    // 取消倒计时
                     cancel();
+                    // 检查是否进入滑动启动界面
+                    checkIsShowScroll();
                 }
             }
         });
