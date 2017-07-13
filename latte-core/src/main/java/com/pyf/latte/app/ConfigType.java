@@ -19,6 +19,10 @@ public enum ConfigType {
     // 延迟加载
     LOADER_DELAYED,
     // 拦截器
-    INTERCEPTOR
+    INTERCEPTOR,
+    // 微信id
+    WE_CHAT_APP_ID,
+    WE_CHAT_APP_SECRET,
+    ACTIVITY
 
 }

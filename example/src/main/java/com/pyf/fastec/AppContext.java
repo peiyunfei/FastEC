@@ -36,6 +36,8 @@ public class AppContext extends Application {
                 .withIcon(new FontEcModule())
                 // 初始化字体图标库
                 .withIcon(new FontAwesomeModule())
+                .withWeChatAppId("wxfcdcecd9df8e0faa")
+                .withWeChatAppSecret("a0560f75335b06e3ebea70f29ff219bf")
                 // 初始化延迟加载时间
                 .withLoaderDelayed(1000)
                 // 初始化测试拦截器

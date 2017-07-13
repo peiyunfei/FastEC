@@ -6,6 +6,7 @@ import android.support.design.widget.TextInputEditText;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Toast;
 
 import com.pyf.latte.delegate.LatteDelegate;
 import com.pyf.latte.ec.R;
@@ -15,6 +16,8 @@ import com.pyf.latte.net.callback.IError;
 import com.pyf.latte.net.callback.IFailure;
 import com.pyf.latte.net.callback.ISuccess;
 import com.pyf.latte.utils.log.LatteLogger;
+import com.pyf.latte.wechat.LatteWeChat;
+import com.pyf.latte.wechat.callbacks.IWeChatSignInCallback;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -81,7 +84,15 @@ public class SignInDelegate extends LatteDelegate {
      */
     @OnClick(R2.id.icon_sign_in_wechat)
     void wechatSignIn() {
-
+        LatteWeChat
+                .getInstance()
+                .onSignSuccess(new IWeChatSignInCallback() {
+                    @Override
+                    public void onSignInSuccess(String userInfo) {
+                        Toast.makeText(getContext(), userInfo, Toast.LENGTH_LONG).show();
+                    }
+                })
+                .signIn();
     }
 
     /**
