@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.pyf.latte.activity.ProxyActivity;
 import com.pyf.latte.delegate.LatteDelegate;
 import com.pyf.latte.ec.launcher.LauncherDelegate;
+import com.pyf.latte.ec.main.EcBottomDelegate;
 import com.pyf.latte.ec.sign.ISIgnListener;
 import com.pyf.latte.ec.sign.SignInDelegate;
 import com.pyf.latte.ui.launcher.ILauncherListener;
@@ -53,7 +54,7 @@ public class ExampleActivity extends ProxyActivity implements
         switch (tag) {
             case SIGNED:
                 Toast.makeText(ExampleActivity.this, "用户已登录", Toast.LENGTH_SHORT).show();
-//                getSupportDelegate().startWithPop(new EcBottomDelegate());
+                getSupportDelegate().startWithPop(new EcBottomDelegate());
                 break;
             case NOT_SIGNED:
                 Toast.makeText(ExampleActivity.this, "用户未登录", Toast.LENGTH_SHORT).show();
