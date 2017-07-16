@@ -14,6 +14,7 @@ import com.joanzapata.iconify.widget.IconTextView;
 import com.pyf.latte.delegate.bottom.BottomItemDelegate;
 import com.pyf.latte.ec.R;
 import com.pyf.latte.ec.R2;
+import com.pyf.latte.ec.main.EcBottomDelegate;
 import com.pyf.latte.ui.recycler.BaseDecoration;
 import com.pyf.latte.ui.refresh.RefreshHandler;
 
@@ -56,6 +57,9 @@ public class IndexDelegate extends BottomItemDelegate {
         mRvIndex.setLayoutManager(new GridLayoutManager(getContext(), 4));
         mRvIndex.addItemDecoration(BaseDecoration.create(
                 ContextCompat.getColor(getContext(), R.color.recycler_decoration), 5));
+        EcBottomDelegate ecBottomDelegate = getParentDelegate();
+        // 添加点击事件
+        mRvIndex.addOnItemTouchListener(IndexItemClickListener.create(ecBottomDelegate));
     }
 
     @Override
