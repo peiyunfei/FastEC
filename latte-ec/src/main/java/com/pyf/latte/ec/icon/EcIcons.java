@@ -12,9 +12,9 @@ import com.joanzapata.iconify.Icon;
 public enum EcIcons implements Icon {
 
     // 二维码扫描图标
-    icon_scan('\ue63b'),
+    icon_scan('\ue602'),
     // 支付宝图标
-    icon_ali_pay('\ue605');
+    icon_ali_pay('\ue606');
 
     private char character;
 

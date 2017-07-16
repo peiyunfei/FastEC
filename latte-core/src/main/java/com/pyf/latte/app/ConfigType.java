@@ -23,6 +23,7 @@ public enum ConfigType {
     // 微信id
     WE_CHAT_APP_ID,
     WE_CHAT_APP_SECRET,
-    ACTIVITY
+    ACTIVITY,
+    HANDLER
 
 }

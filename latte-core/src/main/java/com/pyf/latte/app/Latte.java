@@ -1,6 +1,7 @@
 package com.pyf.latte.app;
 
 import android.content.Context;
+import android.os.Handler;
 
 /**
  * 用于初始化全局信息的类。一般情况下，我们会在application中初始化一些全局信息，但这样会使application中的
@@ -44,6 +45,16 @@ public final class Latte {
     public static Context getApplicationContext() {
         return getConfigurator().
                 getConfiguration(ConfigType.APPLICATION_CONTEXT);
+    }
+
+    /**
+     * 获取handelr
+     *
+     * @return handler
+     */
+    public static Handler getHandler() {
+        return getConfigurator().
+                getConfiguration(ConfigType.HANDLER);
     }
 
 }

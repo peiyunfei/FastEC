@@ -2,8 +2,6 @@ package com.pyf.latte.net.callback;
 
 import android.os.Handler;
 
-import com.pyf.latte.app.ConfigType;
-import com.pyf.latte.app.Latte;
 import com.pyf.latte.net.RestCreator;
 import com.pyf.latte.ui.loader.LatterLoader;
 import com.pyf.latte.ui.loader.LoaderStyle;
@@ -70,15 +68,14 @@ public class RequestCallBacks implements Callback<String> {
     }
 
     private void onRequestFinish() {
-        final long delayed = Latte.getConfiguration(ConfigType.LOADER_DELAYED);
         if (LOADER_STYLE != null) {
-            mHandler.postDelayed(new Runnable() {
+            mHandler.post(new Runnable() {
                 @Override
                 public void run() {
                     RestCreator.getParams().clear();
                     LatterLoader.stopLoading();
                 }
-            }, delayed);
+            });
         }
     }
 }
