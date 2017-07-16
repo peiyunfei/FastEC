@@ -24,7 +24,7 @@ import java.util.List;
  * <br/>
  * 时间：2017/7/15
  */
-public class IndexMultipleAdapter extends
+public class MultipleAdapter extends
         BaseMultiItemQuickAdapter<MultipleItemEntity, MultipleViewHolder>
         implements SpanSizeLookup,
         OnItemClickListener {
@@ -43,13 +43,13 @@ public class IndexMultipleAdapter extends
         return REQUEST_OPTIONS;
     }
 
-    private IndexMultipleAdapter(List<MultipleItemEntity> data) {
+    protected MultipleAdapter(List<MultipleItemEntity> data) {
         super(data);
         initItemView();
     }
 
-    public static IndexMultipleAdapter create(List<MultipleItemEntity> data) {
-        return new IndexMultipleAdapter(data);
+    public static MultipleAdapter create(List<MultipleItemEntity> data) {
+        return new MultipleAdapter(data);
     }
 
     /**

@@ -13,7 +13,7 @@ import com.pyf.latte.net.callback.IError;
 import com.pyf.latte.net.callback.IFailure;
 import com.pyf.latte.net.callback.ISuccess;
 import com.pyf.latte.ui.recycler.DataConverter;
-import com.pyf.latte.ui.recycler.IndexMultipleAdapter;
+import com.pyf.latte.ui.recycler.MultipleAdapter;
 import com.pyf.latte.ui.recycler.MultipleItemEntity;
 
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class RefreshHandler implements
     private final PageBean PAGEBEAN;
     private final DataConverter DATACONVERTER;
     private final Context CONTEXT;
-    private IndexMultipleAdapter mAdapter;
+    private MultipleAdapter mAdapter;
     private List<MultipleItemEntity> mMultipleItemEntities;
     private boolean mIsFirstPage = true;
 
@@ -85,7 +85,7 @@ public class RefreshHandler implements
                         mMultipleItemEntities.addAll(multipleItemEntities);
                         if (mIsFirstPage) {
                             initPageBean(jsonObject);
-                            mAdapter = IndexMultipleAdapter.create(mMultipleItemEntities);
+                            mAdapter = MultipleAdapter.create(mMultipleItemEntities);
                             RECYCLERVIEW.setAdapter(mAdapter);
                         } else {
                             mAdapter.setNewData(mMultipleItemEntities);

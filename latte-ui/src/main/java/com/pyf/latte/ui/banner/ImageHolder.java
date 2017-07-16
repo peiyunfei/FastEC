@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.bumptech.glide.Glide;
-import com.pyf.latte.ui.recycler.IndexMultipleAdapter;
+import com.pyf.latte.ui.recycler.MultipleAdapter;
 
 /**
  *
@@ -29,7 +29,7 @@ public class ImageHolder implements Holder<String> {
     public void UpdateUI(Context context, int position, String data) {
         Glide.with(context)
                 .load(data)
-                .apply(IndexMultipleAdapter.getRequestOptions())
+                .apply(MultipleAdapter.getRequestOptions())
                 .into(mAppCompatImageView);
     }
 }
