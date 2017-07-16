@@ -9,7 +9,6 @@ import com.choices.divider.DividerItemDecoration;
  * <br/>
  * 时间：2017/7/16
  */
-
 public class DividerLookupImpl implements DividerItemDecoration.DividerLookup {
 
     private final int COLOR;

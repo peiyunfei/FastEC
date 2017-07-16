@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide;
 import com.pyf.latte.ui.recycler.IndexMultipleAdapter;
 
 /**
+ *
  * <br/>
  * 作者：裴云飞
  * <br/>

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 数据转换器
  * <br/>
  * 作者：裴云飞
  * <br/>

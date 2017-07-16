@@ -20,12 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 处理刷新
  * <br/>
  * 作者：裴云飞
  * <br/>
  * 时间：2017/7/15
  */
-
 public class RefreshHandler implements
         SwipeRefreshLayout.OnRefreshListener,
         BaseQuickAdapter.RequestLoadMoreListener {
@@ -55,6 +55,9 @@ public class RefreshHandler implements
         return new RefreshHandler(context, refreshLayout, recyclerView, converter, new PageBean());
     }
 
+    /**
+     * 刷新
+     */
     private void refresh() {
         // 正在刷新
         REFRESHLAYOUT.setRefreshing(true);
@@ -122,11 +125,17 @@ public class RefreshHandler implements
         mIsFirstPage = false;
     }
 
+    /**
+     * 下拉刷新
+     */
     @Override
     public void onRefresh() {
         refresh();
     }
 
+    /**
+     * 加载更多
+     */
     @Override
     public void onLoadMoreRequested() {
         PAGEBEAN.addIndex();

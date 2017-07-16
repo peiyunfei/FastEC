@@ -8,7 +8,6 @@ import java.util.LinkedHashMap;
  * <br/>
  * 时间：2017/7/15
  */
-
 public class MultipleItemEntityBuilder {
 
     private final LinkedHashMap<Object, Object> FIELDS = new LinkedHashMap<>();

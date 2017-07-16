@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.widget.Toast;
 
 import com.pyf.latte.activity.ProxyActivity;
+import com.pyf.latte.app.Latte;
 import com.pyf.latte.delegate.LatteDelegate;
 import com.pyf.latte.ec.launcher.LauncherDelegate;
 import com.pyf.latte.ec.main.EcBottomDelegate;
@@ -13,6 +14,8 @@ import com.pyf.latte.ec.sign.ISIgnListener;
 import com.pyf.latte.ec.sign.SignInDelegate;
 import com.pyf.latte.ui.launcher.ILauncherListener;
 import com.pyf.latte.ui.launcher.OnLauncherFinishTag;
+
+import qiu.niorgai.StatusBarCompat;
 
 /**
  * 用于测试框架的activity
@@ -32,6 +35,9 @@ public class ExampleActivity extends ProxyActivity implements
         if (actionBar != null) {
             actionBar.hide();
         }
+        Latte.getConfigurator().withActivity(this);
+        // 去掉状态栏
+        StatusBarCompat.translucentStatusBar(this, true);
     }
 
     @Override

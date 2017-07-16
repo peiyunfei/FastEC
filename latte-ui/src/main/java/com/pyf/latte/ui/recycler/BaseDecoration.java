@@ -10,7 +10,6 @@ import com.choices.divider.DividerItemDecoration;
  * <br/>
  * 时间：2017/7/16
  */
-
 public class BaseDecoration extends DividerItemDecoration {
 
     private BaseDecoration(@ColorInt int color, int size) {
