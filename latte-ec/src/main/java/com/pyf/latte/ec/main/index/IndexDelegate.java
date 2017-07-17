@@ -9,16 +9,26 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import com.joanzapata.iconify.widget.IconTextView;
 import com.pyf.latte.delegate.bottom.BottomItemDelegate;
 import com.pyf.latte.ec.R;
 import com.pyf.latte.ec.R2;
 import com.pyf.latte.ec.main.EcBottomDelegate;
+import com.pyf.latte.net.RestCreator;
+import com.pyf.latte.net.rx.RxRestClient;
 import com.pyf.latte.ui.recycler.BaseDecoration;
 import com.pyf.latte.ui.refresh.RefreshHandler;
 
+import java.util.WeakHashMap;
+
 import butterknife.BindView;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 首页界面
@@ -74,6 +84,67 @@ public class IndexDelegate extends BottomItemDelegate {
     public void onBindView(Bundle savedInstanceState, View rootView) {
         mRefreshHandler = RefreshHandler.create(getContext(), mRefreshLayout,
                 mRvIndex, new IndexDataConverter());
+        testRxJava2();
+    }
+
+    private void testRxJava2() {
+        RxRestClient.builder()
+                .url("IndexServlet")
+                .build()
+                .get()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull String s) {
+                        Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    void testRxJava() {
+        WeakHashMap<String, Object> params = new WeakHashMap<>();
+        RestCreator
+                .getRxRestService()
+                .get("IndexServlet", params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull String s) {
+                        Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @Override

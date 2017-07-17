@@ -2,6 +2,7 @@ package com.pyf.latte.net;
 
 import com.pyf.latte.app.ConfigType;
 import com.pyf.latte.app.Latte;
+import com.pyf.latte.net.rx.RxRestService;
 
 import java.util.ArrayList;
 import java.util.WeakHashMap;
@@ -10,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
@@ -30,6 +32,15 @@ public class RestCreator {
         return RestServiceHolder.REST_SERVICE;
     }
 
+    /**
+     * 获取http请求接口实例
+     *
+     * @return http请求接口实例
+     */
+    public static RxRestService getRxRestService() {
+        return RxRestServiceHolder.RXREST_SERVICE;
+    }
+
     public static WeakHashMap<String, Object> getParams() {
         return ParamsHolder.PARAMS;
     }
@@ -47,6 +58,7 @@ public class RestCreator {
         private static final Retrofit RETROFIT_CLIENT = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(ScalarsConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(OkHttpHolder.OKHTTP_CLIENT)
                 .build();
     }
@@ -83,5 +95,13 @@ public class RestCreator {
     private static final class RestServiceHolder {
         private static final RestService REST_SERVICE =
                 RetrofitHolder.RETROFIT_CLIENT.create(RestService.class);
+    }
+
+    /**
+     * 创建http请求接口实例
+     */
+    private static final class RxRestServiceHolder {
+        private static final RxRestService RXREST_SERVICE =
+                RetrofitHolder.RETROFIT_CLIENT.create(RxRestService.class);
     }
 }
