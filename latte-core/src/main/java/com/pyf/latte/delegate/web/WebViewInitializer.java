@@ -3,6 +3,7 @@ package com.pyf.latte.delegate.web;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.view.View;
+import android.webkit.CookieManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
@@ -20,6 +21,12 @@ public class WebViewInitializer {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             WebView.setWebContentsDebuggingEnabled(true);
         }
+        CookieManager cookie=CookieManager.getInstance();
+        cookie.setAcceptCookie(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            cookie.setAcceptThirdPartyCookies(webView,true);
+        }
+        cookie.setAcceptFileSchemeCookies(true);
         // 不能横向移动
         webView.setHorizontalScrollBarEnabled(false);
         // 不能纵向移动

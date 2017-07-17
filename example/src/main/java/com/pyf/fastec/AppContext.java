@@ -7,7 +7,7 @@ import com.pyf.fastec.event.TestEvent;
 import com.pyf.latte.app.Latte;
 import com.pyf.latte.ec.db.DatabaseManager;
 import com.pyf.latte.ec.icon.FontEcModule;
-import com.pyf.latte.net.interceptors.DebugInterceptor;
+import com.pyf.latte.net.interceptors.AddCookieInterceptor;
 
 /**
  * 全局应用程序类
@@ -33,6 +33,7 @@ public class AppContext extends Application {
         Latte.init(this)
                 // 初始化访问网络的域名
                 .withApiHost("http://192.168.1.227:8080/Ec/")
+                .withWebHost("http://www.baidu.com")
                 // 初始化阿里巴巴矢量字体图标库
                 .withIcon(new FontEcModule())
                 // 初始化字体图标库
@@ -41,8 +42,8 @@ public class AppContext extends Application {
                 .withWeChatAppSecret("a0560f75335b06e3ebea70f29ff219bf")
                 // 初始化延迟加载时间
                 .withLoaderDelayed(1000)
-                // 初始化测试拦截器
-                .withInterceptor(new DebugInterceptor("index", R.raw.test))
+                // 初始化cookie拦截器
+                .withInterceptor(new AddCookieInterceptor())
                 .withJavaScriptInterface("latte")
                 .withWebEvent("test", new TestEvent())
                 // 初始化完成

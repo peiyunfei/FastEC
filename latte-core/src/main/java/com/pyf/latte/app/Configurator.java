@@ -81,6 +81,18 @@ public class Configurator {
     }
 
     /**
+     * 配置访问网络的域名
+     *
+     * @param host
+     *         访问网络的域名
+     * @return 本类唯一实例
+     */
+    public final Configurator withWebHost(String host) {
+        LATTE_CONFIGS.put(ConfigType.WEB_HOST.name(), host);
+        return this;
+    }
+
+    /**
      * 添加字体图标库
      *
      * @param descriptor
