@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.pyf.latte.delegate.bottom.BottomItemDelegate;
+import com.pyf.latte.delegate.web.WebDelegateImpl;
 import com.pyf.latte.ec.R;
 
 /**
@@ -13,11 +14,13 @@ import com.pyf.latte.ec.R;
  * <br/>
  * 时间：2017/7/14
  */
-
 public class DiscoverDelegate extends BottomItemDelegate {
     @Override
     public void onBindView(Bundle savedInstanceState, View rootView) {
-
+        WebDelegateImpl delegate = WebDelegateImpl
+                .create("index.html");
+        delegate.setTopDelegate(getParentDelegate());
+        loadRootFragment(R.id.web_content_container, delegate);
     }
 
     @Override

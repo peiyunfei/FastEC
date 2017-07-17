@@ -3,6 +3,7 @@ package com.pyf.fastec;
 import android.app.Application;
 
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
+import com.pyf.fastec.event.TestEvent;
 import com.pyf.latte.app.Latte;
 import com.pyf.latte.ec.db.DatabaseManager;
 import com.pyf.latte.ec.icon.FontEcModule;
@@ -42,6 +43,8 @@ public class AppContext extends Application {
                 .withLoaderDelayed(1000)
                 // 初始化测试拦截器
                 .withInterceptor(new DebugInterceptor("index", R.raw.test))
+                .withJavaScriptInterface("latte")
+                .withWebEvent("test", new TestEvent())
                 // 初始化完成
                 .configure();
         // 初始化greenDao
