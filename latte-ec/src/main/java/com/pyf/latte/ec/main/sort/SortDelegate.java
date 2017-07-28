@@ -19,9 +19,9 @@ public class SortDelegate extends BottomItemDelegate {
     @Override
     public void onBindView(Bundle savedInstanceState, View rootView) {
         // 加载左侧列表界面
-        loadRootFragment(R.id.fl_list_container, new VerticalListDelegate());
+        getSupportDelegate().loadRootFragment(R.id.fl_list_container, new VerticalListDelegate());
         // 加载右侧内容界面
-        loadRootFragment(R.id.fl_content_container, ContentDelegate.newInstance(1));
+        getSupportDelegate().loadRootFragment(R.id.fl_content_container, ContentDelegate.newInstance(1));
 
     }
 

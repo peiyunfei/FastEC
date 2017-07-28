@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="anim_panel_up_from_bottom" parent="android:Animation">
+
+        <item name="android:windowEnterAnimation">@anim/pay_panel_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/pay_panel_from_up</item>
+    </style>
+</resources>

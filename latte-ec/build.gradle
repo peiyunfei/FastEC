@@ -27,4 +27,5 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
     compile project(':latte-ui')
+    compile files('libs/alipaySdk-20161222.jar')
 }

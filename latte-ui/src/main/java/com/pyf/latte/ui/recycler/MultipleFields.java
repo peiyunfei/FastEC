@@ -21,5 +21,11 @@ public enum MultipleFields {
     SPAN_SIZE,
     ID,
     NAME,
-    TAG
+    TAG,
+    DESC,
+    ITEM_PRICE,
+    COUNT,
+    IS_SELECTED,
+    POSITION
+
 }

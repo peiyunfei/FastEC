@@ -38,8 +38,8 @@ dependencies {
     compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
     compile 'com.joanzapata.iconify:android-iconify-ionicons:2.2.2'
     // fragment依赖
-    compile 'me.yokeyword:fragmentation:1.0.6'
-    compile 'me.yokeyword:fragmentation-swipeback:1.0.6'
+    compile 'me.yokeyword:fragmentation:1.0.9'
+    compile 'me.yokeyword:fragmentation-swipeback:1.0.9'
     // butterknife
     compile 'com.jakewharton:butterknife:8.7.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'

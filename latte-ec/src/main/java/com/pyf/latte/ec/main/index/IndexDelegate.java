@@ -84,7 +84,7 @@ public class IndexDelegate extends BottomItemDelegate {
     public void onBindView(Bundle savedInstanceState, View rootView) {
         mRefreshHandler = RefreshHandler.create(getContext(), mRefreshLayout,
                 mRvIndex, new IndexDataConverter());
-        testRxJava2();
+//        testRxJava2();
     }
 
     private void testRxJava2() {

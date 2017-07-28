@@ -1,6 +1,6 @@
 package com.pyf.latte.ec.launcher;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
@@ -44,10 +44,10 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
     private ILauncherListener mILauncherListener;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        if (activity instanceof ILauncherListener) {
-            mILauncherListener = (ILauncherListener) activity;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof ILauncherListener) {
+            mILauncherListener = (ILauncherListener) context;
         }
     }
 
@@ -89,7 +89,7 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
         boolean flag = LattePreference.getAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name());
         // 不是第一次进入应用
         if (!flag) {
-            start(new LauncherScrollDelegate(), SINGLETASK);
+            getSupportDelegate().start(new LauncherScrollDelegate(), SINGLETASK);
         } else {
             // 判断是否登录
             AccountManager.checkAccount(new IUserCheck() {

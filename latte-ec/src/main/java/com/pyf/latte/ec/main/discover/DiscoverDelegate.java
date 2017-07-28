@@ -20,7 +20,7 @@ public class DiscoverDelegate extends BottomItemDelegate {
         WebDelegateImpl delegate = WebDelegateImpl
                 .create("index.html");
         delegate.setTopDelegate(getParentDelegate());
-        loadRootFragment(R.id.web_content_container, delegate);
+        getSupportDelegate().loadRootFragment(R.id.web_content_container, delegate);
     }
 
     @Override
