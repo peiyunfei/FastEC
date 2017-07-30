@@ -16,4 +16,5 @@ public class ItemType {
     public static final int VERTICAL_MENU_LIST = 5;
     // 购物车
     public static final int SHOP_CART = 6;
+    public static final int LIST_SETTING = 7;
 }
