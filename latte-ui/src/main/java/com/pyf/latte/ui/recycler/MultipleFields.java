@@ -26,6 +26,7 @@ public enum MultipleFields {
     ITEM_PRICE,
     COUNT,
     IS_SELECTED,
+    TIME,
     POSITION
 
 }
