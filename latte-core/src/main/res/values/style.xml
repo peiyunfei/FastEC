@@ -27,4 +27,10 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@android:style/Animation</item>
     </style>
+
+    <style name="anim_panel_up_from_bottom" parent="android:Animation">
+
+        <item name="android:windowEnterAnimation">@anim/pay_panel_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/pay_panel_from_up</item>
+    </style>
 </resources>
