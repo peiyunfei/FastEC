@@ -17,7 +17,9 @@ public class ItemType {
     // 购物车
     public static final int SHOP_CART = 6;
     // 系统设置
-    public static final int LIST_SETTING = 7;
+    public static final int LIST_NORMAL = 7;
     // 订单列表
     public static final int ORDER_LIST = 7;
+    // 头像
+    public static final int LIST_AVATAR = 8;
 }

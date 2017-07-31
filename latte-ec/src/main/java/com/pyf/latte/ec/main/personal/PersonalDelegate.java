@@ -12,6 +12,7 @@ import com.pyf.latte.ec.R2;
 import com.pyf.latte.ec.main.personal.list.ListAdapter;
 import com.pyf.latte.ec.main.personal.list.ListBean;
 import com.pyf.latte.ec.main.personal.order.OrderListDelegate;
+import com.pyf.latte.ec.main.personal.profile.UserProfileDelegate;
 import com.pyf.latte.ui.recycler.ItemType;
 
 import java.util.ArrayList;
@@ -35,34 +36,57 @@ public class PersonalDelegate extends BottomItemDelegate {
     public static final String ORDER_TYPE = "ORDER_TYPE";
     private Bundle mArgs;
 
+    /**
+     * 跳转到我的订单界面
+     */
     @OnClick(R2.id.rl_my_order)
     void onClickMyOrder() {
         mArgs.putString(ORDER_TYPE, "all");
         startOrderListByType();
     }
 
+    /**
+     * 跳转到待付款界面
+     */
     @OnClick(R2.id.ll_pay)
     void onClickPay() {
         mArgs.putString(ORDER_TYPE, "pay");
         startOrderListByType();
     }
 
+    /**
+     * 跳转到待收货界面
+     */
     @OnClick(R2.id.ll_receive)
     void onClickReceive() {
         mArgs.putString(ORDER_TYPE, "receive");
         startOrderListByType();
     }
 
+    /**
+     * 跳转到待评价界面
+     */
     @OnClick(R2.id.ll_evaluate)
     void onClickEvaluate() {
         mArgs.putString(ORDER_TYPE, "evaluate");
         startOrderListByType();
     }
 
+    /**
+     * 跳转到售后界面
+     */
     @OnClick(R2.id.ll_after_market)
     void onClickAfterMarket() {
         mArgs.putString(ORDER_TYPE, "after_market");
         startOrderListByType();
+    }
+
+    /**
+     * 跳转到用户信息界面
+     */
+    @OnClick(R2.id.ll_user)
+    void onClickUserProfile() {
+        getParentDelegate().getSupportDelegate().start(new UserProfileDelegate());
     }
 
     private void startOrderListByType() {
@@ -78,15 +102,16 @@ public class PersonalDelegate extends BottomItemDelegate {
     }
 
     @Override
-    public void onBindView(Bundle savedInstanceState, View rootView) {
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
         ListBean address = new ListBean.Builder()
-                .setItemType(ItemType.LIST_SETTING)
+                .setItemType(ItemType.LIST_NORMAL)
                 .setId(1)
                 .setText("收货地址")
                 .build();
         ListBean setting = new ListBean.Builder()
-                .setItemType(ItemType.LIST_SETTING)
-                .setId(1)
+                .setItemType(ItemType.LIST_NORMAL)
+                .setId(2)
                 .setText("系统设置")
                 .build();
         List<ListBean> list = new ArrayList<>();
@@ -96,6 +121,11 @@ public class PersonalDelegate extends BottomItemDelegate {
         ListAdapter adapter = new ListAdapter(list);
         mRvSetting.setLayoutManager(manager);
         mRvSetting.setAdapter(adapter);
+    }
+
+    @Override
+    public void onBindView(Bundle savedInstanceState, View rootView) {
+
     }
 
     @Override

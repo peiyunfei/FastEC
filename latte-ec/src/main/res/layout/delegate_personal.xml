@@ -15,6 +15,7 @@
             android:background="@color/app_main">
 
             <android.support.v7.widget.LinearLayoutCompat
+                android:id="@+id/ll_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -22,7 +23,9 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/iv_user_avatar"
+                    android:src="@mipmap/user_avatar"
                     android:layout_width="80dp"
+                    android:layout_gravity="center"
                     android:layout_height="80dp"
                     android:layout_marginBottom="10dp"/>
 
@@ -31,8 +34,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:text="义薄云天小关羽"
                     android:textColor="@android:color/white"
-                    android:textSize="25sp"/>
+                    android:textSize="20sp"/>
             </android.support.v7.widget.LinearLayoutCompat>
         </RelativeLayout>
 

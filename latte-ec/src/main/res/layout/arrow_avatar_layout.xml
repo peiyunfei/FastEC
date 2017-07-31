@@ -5,21 +5,12 @@
                 android:layout_marginBottom="5dp"
                 android:background="@android:color/white">
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/tv_arrow_text"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_arrow_avatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="10dp"
-        android:gravity="center"
-        android:textSize="18sp"/>
-
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/tv_arrow_value"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginRight="10dp"
-        android:layout_toLeftOf="@+id/icon_arrow"
-        android:gravity="center"
+        android:layout_centerVertical="true"
         android:textSize="18sp"/>
 
     <com.joanzapata.iconify.widget.IconTextView
