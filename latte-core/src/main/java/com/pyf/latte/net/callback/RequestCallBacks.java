@@ -2,7 +2,6 @@ package com.pyf.latte.net.callback;
 
 import android.os.Handler;
 
-import com.pyf.latte.net.RestCreator;
 import com.pyf.latte.ui.loader.LatterLoader;
 import com.pyf.latte.ui.loader.LoaderStyle;
 
@@ -72,7 +71,6 @@ public class RequestCallBacks implements Callback<String> {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    RestCreator.getParams().clear();
                     LatterLoader.stopLoading();
                 }
             });

@@ -30,7 +30,7 @@ public class RxRestClient {
     // 网络访问地址
     private final String URL;
     // 存储请求参数的集合
-    private final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
+    private final WeakHashMap<String, Object> PARAMS;
     // 请求体
     private final RequestBody BODY;
     // 上下文
@@ -42,11 +42,13 @@ public class RxRestClient {
 
     public RxRestClient(String url,
                         RequestBody body,
+                        WeakHashMap<String, Object> params,
                         Context context,
                         LoaderStyle loaderStyle,
                         File file) {
         this.URL = url;
         this.BODY = body;
+        this.PARAMS = params;
         this.CONTEXT = context;
         this.LOADER_STYLE = loaderStyle;
         this.FILE = file;

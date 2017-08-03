@@ -34,7 +34,7 @@ public class DownloadHandler {
     // 文件名
     private final String NAME;
     // 存储请求参数的集合
-    private final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
+    private final WeakHashMap<String, Object> PARAMS;
     // 请求错误
     private final IError IERROR;
     // 请求失败
@@ -48,6 +48,7 @@ public class DownloadHandler {
                            String downloadDir,
                            String extension,
                            String name,
+                           WeakHashMap<String, Object> params,
                            IError iError,
                            IFailure iFailure,
                            ISuccess iSuccess,
@@ -57,6 +58,7 @@ public class DownloadHandler {
         this.DOWNLOAD_DIR = downloadDir;
         this.EXTENSION = extension;
         this.NAME = name;
+        this.PARAMS = params;
         this.IERROR = iError;
         this.IFAILURE = iFailure;
         this.ISUCCESS = iSuccess;
@@ -92,14 +94,12 @@ public class DownloadHandler {
                         IERROR.onError(response.code(), response.message());
                     }
                 }
-                RestCreator.getParams().clear();
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 if (IFAILURE != null) {
                     IFAILURE.onFailure();
-                    RestCreator.getParams().clear();
                 }
             }
         });

@@ -22,4 +22,6 @@ public class ItemType {
     public static final int ORDER_LIST = 7;
     // 头像
     public static final int LIST_AVATAR = 8;
+    // 地址管理
+    public static final int ITEM_ADDRESS = 9;
 }

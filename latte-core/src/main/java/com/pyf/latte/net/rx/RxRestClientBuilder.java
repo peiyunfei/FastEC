@@ -5,6 +5,7 @@ import android.content.Context;
 import com.pyf.latte.ui.loader.LoaderStyle;
 
 import java.io.File;
+import java.util.WeakHashMap;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -17,6 +18,7 @@ import okhttp3.RequestBody;
  */
 public class RxRestClientBuilder {
 
+    private final WeakHashMap<String, Object> PARAMS = new WeakHashMap<>();
     private String mUrl;
     // 请求体
     private RequestBody mBody;
@@ -49,6 +51,16 @@ public class RxRestClientBuilder {
      */
     public final RxRestClientBuilder raw(String raw) {
         mBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), raw);
+        return this;
+    }
+
+    public final RxRestClientBuilder params(WeakHashMap<String, Object> params) {
+        PARAMS.putAll(params);
+        return this;
+    }
+
+    public final RxRestClientBuilder params(String key, Object value) {
+        PARAMS.put(key, value);
         return this;
     }
 
@@ -117,6 +129,7 @@ public class RxRestClientBuilder {
         return new RxRestClient(
                 mUrl,
                 mBody,
+                PARAMS,
                 mContext,
                 mLoaderStyle,
                 mFile);

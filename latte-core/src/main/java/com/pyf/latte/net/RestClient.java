@@ -12,7 +12,6 @@ import com.pyf.latte.ui.loader.LatterLoader;
 import com.pyf.latte.ui.loader.LoaderStyle;
 
 import java.io.File;
-import java.util.Map;
 import java.util.WeakHashMap;
 
 import okhttp3.MediaType;
@@ -39,7 +38,7 @@ public class RestClient {
     // 文件名
     private final String NAME;
     // 存储请求参数的集合
-    private final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
+    private final WeakHashMap<String, Object> PARAMS;
     // 请求错误
     private final IError IERROR;
     // 请求失败
@@ -61,7 +60,7 @@ public class RestClient {
                       String downloadDir,
                       String extension,
                       String name,
-                      Map<String, Object> params,
+                      WeakHashMap<String, Object> params,
                       IError iError,
                       IFailure iFailure,
                       ISuccess iSuccess,
@@ -74,7 +73,7 @@ public class RestClient {
         this.DOWNLOAD_DIR = downloadDir;
         this.EXTENSION = extension;
         this.NAME = name;
-        this.PARAMS.putAll(params);
+        this.PARAMS = params;
         this.IERROR = iError;
         this.IFAILURE = iFailure;
         this.ISUCCESS = iSuccess;
@@ -203,6 +202,6 @@ public class RestClient {
      */
     public final void download() {
         new DownloadHandler(URL, DOWNLOAD_DIR, EXTENSION, NAME,
-                IERROR, IFAILURE, ISUCCESS, IREQUEST).handlerDownload();
+                PARAMS, IERROR, IFAILURE, ISUCCESS, IREQUEST).handlerDownload();
     }
 }

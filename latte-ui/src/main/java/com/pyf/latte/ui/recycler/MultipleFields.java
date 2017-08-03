@@ -27,6 +27,8 @@ public enum MultipleFields {
     COUNT,
     IS_SELECTED,
     TIME,
-    POSITION
-
+    POSITION,
+    ADDRESS,
+    DEFAULT_ADDRESS,
+    PHONE
 }

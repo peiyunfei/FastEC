@@ -5,7 +5,6 @@ import com.pyf.latte.app.Latte;
 import com.pyf.latte.net.rx.RxRestService;
 
 import java.util.ArrayList;
-import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
@@ -41,13 +40,13 @@ public class RestCreator {
         return RxRestServiceHolder.RXREST_SERVICE;
     }
 
-    public static WeakHashMap<String, Object> getParams() {
+   /* public static WeakHashMap<String, Object> getParams() {
         return ParamsHolder.PARAMS;
     }
 
     private static final class ParamsHolder {
         private static final WeakHashMap<String, Object> PARAMS = new WeakHashMap<>();
-    }
+    }*/
 
     /**
      * 创建retrofit实例

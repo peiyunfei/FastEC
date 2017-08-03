@@ -9,10 +9,12 @@ import android.view.View;
 import com.pyf.latte.delegate.bottom.BottomItemDelegate;
 import com.pyf.latte.ec.R;
 import com.pyf.latte.ec.R2;
+import com.pyf.latte.ec.main.personal.address.AddressDelegate;
 import com.pyf.latte.ec.main.personal.list.ListAdapter;
 import com.pyf.latte.ec.main.personal.list.ListBean;
 import com.pyf.latte.ec.main.personal.order.OrderListDelegate;
 import com.pyf.latte.ec.main.personal.profile.UserProfileDelegate;
+import com.pyf.latte.ec.main.personal.setting.SettingDelegate;
 import com.pyf.latte.ui.recycler.ItemType;
 
 import java.util.ArrayList;
@@ -108,10 +110,12 @@ public class PersonalDelegate extends BottomItemDelegate {
                 .setItemType(ItemType.LIST_NORMAL)
                 .setId(1)
                 .setText("收货地址")
+                .setDelegate(new AddressDelegate())
                 .build();
         ListBean setting = new ListBean.Builder()
                 .setItemType(ItemType.LIST_NORMAL)
                 .setId(2)
+                .setDelegate(new SettingDelegate())
                 .setText("系统设置")
                 .build();
         List<ListBean> list = new ArrayList<>();
@@ -121,6 +125,7 @@ public class PersonalDelegate extends BottomItemDelegate {
         ListAdapter adapter = new ListAdapter(list);
         mRvSetting.setLayoutManager(manager);
         mRvSetting.setAdapter(adapter);
+        mRvSetting.addOnItemTouchListener(new PersonalClickListener(this));
     }
 
     @Override

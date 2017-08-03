@@ -9,7 +9,6 @@ import com.pyf.latte.net.callback.ISuccess;
 import com.pyf.latte.ui.loader.LoaderStyle;
 
 import java.io.File;
-import java.util.Map;
 import java.util.WeakHashMap;
 
 import okhttp3.MediaType;
@@ -51,7 +50,7 @@ public class RestClientBuilder {
     private File mFile;
 
     RestClientBuilder() {
-        mParams = RestCreator.getParams();
+        mParams = new WeakHashMap<>();
     }
 
     /**
@@ -104,7 +103,7 @@ public class RestClientBuilder {
      * @param params
      *         请求参数
      */
-    public final RestClientBuilder params(Map<String, Object> params) {
+    public final RestClientBuilder params(WeakHashMap<String, Object> params) {
         this.mParams.putAll(params);
         return this;
     }
