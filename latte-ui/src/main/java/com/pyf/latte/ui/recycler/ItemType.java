@@ -17,11 +17,13 @@ public class ItemType {
     // 购物车
     public static final int SHOP_CART = 6;
     // 系统设置
-    public static final int LIST_NORMAL = 7;
+    public static final int ITEM_NORMAL = 7;
     // 订单列表
-    public static final int ORDER_LIST = 7;
+    public static final int ORDER_LIST = 8;
     // 头像
-    public static final int LIST_AVATAR = 8;
+    public static final int ITEM_AVATAR = 9;
     // 地址管理
-    public static final int ITEM_ADDRESS = 9;
+    public static final int ITEM_ADDRESS = 10;
+    // 消息推送
+    public static final int ITEM_SWITCH = 11;
 }

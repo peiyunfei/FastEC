@@ -39,31 +39,31 @@ public class UserProfileDelegate extends LatteDelegate {
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         ListBean avatar = new ListBean.Builder()
-                .setItemType(ItemType.LIST_AVATAR)
+                .setItemType(ItemType.ITEM_AVATAR)
                 .setId(1)
                 .setImageUrl("http://img.mukewang.com/user/57ce4a780001169b02790279-100-100.jpg")
                 .build();
         ListBean name = new ListBean.Builder()
-                .setItemType(ItemType.LIST_NORMAL)
+                .setItemType(ItemType.ITEM_NORMAL)
                 .setId(2)
                 .setText("姓名")
                 .setDelegate(new NameDelegate())
                 .setValue("")
                 .build();
         ListBean gender = new ListBean.Builder()
-                .setItemType(ItemType.LIST_NORMAL)
+                .setItemType(ItemType.ITEM_NORMAL)
                 .setId(3)
                 .setText("性别")
                 .setValue("")
                 .build();
         ListBean birthday = new ListBean.Builder()
-                .setItemType(ItemType.LIST_NORMAL)
+                .setItemType(ItemType.ITEM_NORMAL)
                 .setId(4)
                 .setText("生日")
                 .setValue("")
                 .build();
         ListBean address = new ListBean.Builder()
-                .setItemType(ItemType.LIST_NORMAL)
+                .setItemType(ItemType.ITEM_NORMAL)
                 .setId(5)
                 .setText("所在地")
                 .setValue("")

@@ -1,6 +1,7 @@
 package com.pyf.fastec;
 
 import android.app.Application;
+import android.support.annotation.Nullable;
 
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.pyf.fastec.event.TestEvent;
@@ -8,6 +9,9 @@ import com.pyf.latte.app.Latte;
 import com.pyf.latte.ec.db.DatabaseManager;
 import com.pyf.latte.ec.icon.FontEcModule;
 import com.pyf.latte.net.interceptors.AddCookieInterceptor;
+import com.pyf.latte.utils.callback.CallbackManager;
+import com.pyf.latte.utils.callback.CallbackType;
+import com.pyf.latte.utils.callback.IGlobalCallback;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -55,5 +59,24 @@ public class AppContext extends Application {
         // 初始化极光推送
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
+        // 打开推送
+        CallbackManager.getInstance().addCallback(CallbackType.TAG_OPEN_PUSH, new IGlobalCallback() {
+            @Override
+            public void executeCallback(@Nullable Object args) {
+                if (JPushInterface.isPushStopped(Latte.getApplicationContext())) {
+                    JPushInterface.setDebugMode(true);
+                    JPushInterface.init(Latte.getApplicationContext());
+                }
+            }
+        });
+        // 关闭推送
+        CallbackManager.getInstance().addCallback(CallbackType.TAG_STOP_PUSH, new IGlobalCallback() {
+            @Override
+            public void executeCallback(@Nullable Object args) {
+                if (!JPushInterface.isPushStopped(Latte.getApplicationContext())) {
+                    JPushInterface.stopPush(Latte.getApplicationContext());
+                }
+            }
+        });
     }
 }

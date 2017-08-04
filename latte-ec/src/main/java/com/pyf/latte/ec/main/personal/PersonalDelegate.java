@@ -107,13 +107,13 @@ public class PersonalDelegate extends BottomItemDelegate {
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         ListBean address = new ListBean.Builder()
-                .setItemType(ItemType.LIST_NORMAL)
+                .setItemType(ItemType.ITEM_NORMAL)
                 .setId(1)
                 .setText("收货地址")
                 .setDelegate(new AddressDelegate())
                 .build();
         ListBean setting = new ListBean.Builder()
-                .setItemType(ItemType.LIST_NORMAL)
+                .setItemType(ItemType.ITEM_NORMAL)
                 .setId(2)
                 .setDelegate(new SettingDelegate())
                 .setText("系统设置")
