@@ -9,6 +9,8 @@ import com.pyf.latte.ec.db.DatabaseManager;
 import com.pyf.latte.ec.icon.FontEcModule;
 import com.pyf.latte.net.interceptors.AddCookieInterceptor;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * 全局应用程序类
  * <br/>
@@ -50,5 +52,8 @@ public class AppContext extends Application {
                 .configure();
         // 初始化greenDao
         DatabaseManager.getInstance().init(this);
+        // 初始化极光推送
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
 }

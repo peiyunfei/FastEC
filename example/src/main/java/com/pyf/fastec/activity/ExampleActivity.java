@@ -15,6 +15,7 @@ import com.pyf.latte.ec.sign.SignInDelegate;
 import com.pyf.latte.ui.launcher.ILauncherListener;
 import com.pyf.latte.ui.launcher.OnLauncherFinishTag;
 
+import cn.jpush.android.api.JPushInterface;
 import qiu.niorgai.StatusBarCompat;
 
 /**
@@ -67,5 +68,17 @@ public class ExampleActivity extends ProxyActivity implements
                 getSupportDelegate().startWithPop(new SignInDelegate());
                 break;
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
     }
 }
