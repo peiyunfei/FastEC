@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.pyf.latte.ui.camera.CameraImageBean;
 import com.pyf.latte.ui.camera.LatteCamera;
 import com.pyf.latte.ui.camera.RequestCodes;
+import com.pyf.latte.ui.scanner.ScannerDelegate;
 import com.pyf.latte.utils.callback.CallbackManager;
 import com.pyf.latte.utils.callback.CallbackType;
 import com.pyf.latte.utils.callback.IGlobalCallback;
@@ -24,7 +25,7 @@ import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
 
 /**
- * 判定安卓6.0动态权限
+ * 安卓6.0动态权限
  * <br/>
  * 作者：裴云飞
  * <br/>
@@ -51,11 +52,11 @@ public abstract class PermissionCheckDelegate extends BaseDelegate {
     @NeedsPermission({Manifest.permission.CAMERA,
             Manifest.permission.WRITE_EXTERNAL_STORAGE})
     void startScan(BaseDelegate delegate) {
-//        delegate.getSupportDelegate().startForResult(new ScannerDelegate(), RequestCodes.SCAN);
+        delegate.getSupportDelegate().startForResult(new ScannerDelegate(), RequestCodes.SCAN);
     }
 
     public void startScanWithCheck(BaseDelegate delegate) {
-//        PermissionCheckDelegatePermissionsDispatcher.startScanWithCheck(this, delegate);
+        PermissionCheckDelegatePermissionsDispatcher.startScanWithCheck(this, delegate);
     }
 
     @OnPermissionDenied({Manifest.permission.CAMERA,

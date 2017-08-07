@@ -1,8 +1,10 @@
 package com.pyf.latte.delegate.web.event;
 
 import android.content.Context;
+import android.webkit.WebView;
 
 import com.pyf.latte.delegate.LatteDelegate;
+import com.pyf.latte.delegate.web.WebDelegate;
 
 /**
  * <br/>
@@ -14,8 +16,12 @@ public abstract class Event implements IEvent {
 
     private Context mContext;
     private String mAction;
-    private LatteDelegate mDelegate;
+    private WebDelegate mDelegate;
     private String mUrl;
+
+    public WebView getWebView() {
+        return mDelegate.getWebView();
+    }
 
     public Context getContext() {
         return mContext;
@@ -37,7 +43,7 @@ public abstract class Event implements IEvent {
         return mDelegate;
     }
 
-    public void setDelegate(LatteDelegate delegate) {
+    public void setDelegate(WebDelegate delegate) {
         mDelegate = delegate;
     }
 

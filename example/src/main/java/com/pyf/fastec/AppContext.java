@@ -4,6 +4,8 @@ import android.app.Application;
 import android.support.annotation.Nullable;
 
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
+import com.mob.MobSDK;
+import com.pyf.fastec.event.ShareEvent;
 import com.pyf.fastec.event.TestEvent;
 import com.pyf.latte.app.Latte;
 import com.pyf.latte.ec.db.DatabaseManager;
@@ -52,8 +54,10 @@ public class AppContext extends Application {
                 .withInterceptor(new AddCookieInterceptor())
                 .withJavaScriptInterface("latte")
                 .withWebEvent("test", new TestEvent())
+                .withWebEvent("share", new ShareEvent())
                 // 初始化完成
                 .configure();
+        MobSDK.init(this);
         // 初始化greenDao
         DatabaseManager.getInstance().init(this);
         // 初始化极光推送

@@ -24,6 +24,7 @@ import com.pyf.latte.ui.refresh.RefreshHandler;
 import java.util.WeakHashMap;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -49,10 +50,13 @@ public class IndexDelegate extends BottomItemDelegate {
     IconTextView mIconMessage;
     @BindView(R2.id.et_index_search)
     AppCompatEditText mEtSearch;
-    @BindView(R2.id.icon_index_scan)
-    IconTextView mIconScan;
 
     private RefreshHandler mRefreshHandler;
+
+    @OnClick(R2.id.icon_index_scan)
+    void onClickScanner() {
+        startScanWithCheck(this);
+    }
 
     private void initRefreshLayout() {
         mRefreshLayout.setColorSchemeResources(
@@ -84,7 +88,7 @@ public class IndexDelegate extends BottomItemDelegate {
     public void onBindView(Bundle savedInstanceState, View rootView) {
         mRefreshHandler = RefreshHandler.create(getContext(), mRefreshLayout,
                 mRvIndex, new IndexDataConverter());
-//        testRxJava2();
+        //        testRxJava2();
     }
 
     private void testRxJava2() {

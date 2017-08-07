@@ -8,7 +8,6 @@ import android.webkit.URLUtil;
 import android.webkit.WebView;
 
 import com.pyf.latte.delegate.LatteDelegate;
-import com.pyf.latte.delegate.web.WebDelegate;
 import com.pyf.latte.delegate.web.WebDelegateImpl;
 
 /**
@@ -30,7 +29,7 @@ public class Route {
         return Holder.INSTANCE;
     }
 
-    public boolean handleWebUrl(WebDelegate delegate, String url) {
+    public boolean handleWebUrl(com.pyf.latte.delegate.web.WebDelegate delegate, String url) {
         if (url.contains("tel:")) {
             callPhone(delegate.getContext(), url);
             return true;
@@ -41,7 +40,7 @@ public class Route {
         return true;
     }
 
-    public void loadPage(WebDelegate delegate, String url) {
+    public void loadPage(com.pyf.latte.delegate.web.WebDelegate delegate, String url) {
         loadPage(delegate.getWebView(), url);
     }
 
