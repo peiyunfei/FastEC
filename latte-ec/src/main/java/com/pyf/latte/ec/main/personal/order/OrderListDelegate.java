@@ -74,6 +74,8 @@ public class OrderListDelegate extends LatteDelegate {
                         LinearLayoutManager manager = new LinearLayoutManager(getContext());
                         mRvOrderList.setLayoutManager(manager);
                         mRvOrderList.setAdapter(adapter);
+                        mRvOrderList.addOnItemTouchListener
+                                (new OrderListClickListener(OrderListDelegate.this));
                     }
                 })
                 .failure(new IFailure() {

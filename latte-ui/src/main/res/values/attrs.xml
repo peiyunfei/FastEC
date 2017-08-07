@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="camera_photo_layout">
+        <!-- 图片的最大数-->
+        <attr name="max_count" format="integer"/>
+        <!-- 每行图片的个数-->
+        <attr name="line_count" format="integer"/>
+        <!-- 图片的间距-->
+        <attr name="item_margin" format="integer"/>
+        <!-- 图片的大小-->
+        <attr name="icon_size" format="dimension"/>
+    </declare-styleable>
+</resources>

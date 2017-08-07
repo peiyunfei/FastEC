@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:layout_marginLeft="10dp"
+              android:layout_marginRight="10dp"
+              android:orientation="vertical"
+              android:paddingBottom="10dp">
+
+    <Button
+        android:id="@+id/btn_image_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_border_take_photo"
+        android:gravity="center"
+        android:text="删除"
+        android:textSize="20sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@android:color/transparent"/>
+
+    <Button
+        android:id="@+id/btn_image_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_border_album"
+        android:gravity="center"
+        android:text="取消"
+        android:textSize="20sp"/>
+
+</LinearLayout>
