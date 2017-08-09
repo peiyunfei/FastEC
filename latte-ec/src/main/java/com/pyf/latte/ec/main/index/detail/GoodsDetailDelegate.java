@@ -1,4 +1,4 @@
-package com.pyf.latte.ec.detail;
+package com.pyf.latte.ec.main.index.detail;
 
 import android.os.Bundle;
 import android.view.View;

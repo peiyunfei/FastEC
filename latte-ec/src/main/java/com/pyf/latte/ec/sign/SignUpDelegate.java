@@ -59,7 +59,7 @@ public class SignUpDelegate extends LatteDelegate {
     void signUp() {
         if (checkForm()) {
             RestClient.builder()
-                    .url("http://192.168.1.229:8080/Ec/SignUpServlet")
+                    .url("SignUpServlet")
                     .params("name", mName)
                     .params("address", mAddress)
                     .params("phone", mPhone)

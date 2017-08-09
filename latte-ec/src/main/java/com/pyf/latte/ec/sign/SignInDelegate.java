@@ -54,7 +54,7 @@ public class SignInDelegate extends LatteDelegate {
     void signIn() {
         if (checkForm()) {
             RestClient.builder()
-                    .url("http://192.168.1.229:8080/Ec/SignUpServlet")
+                    .url("SignUpServlet")
                     .params("address", mEmail)
                     .success(new ISuccess() {
                         @Override

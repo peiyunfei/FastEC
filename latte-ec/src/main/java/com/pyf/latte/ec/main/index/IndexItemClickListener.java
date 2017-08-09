@@ -5,7 +5,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.SimpleClickListener;
 import com.pyf.latte.delegate.LatteDelegate;
-import com.pyf.latte.ec.detail.GoodsDetailDelegate;
+import com.pyf.latte.ec.main.index.detail.GoodsDetailDelegate;
 
 /**
  * 首页点击事件
@@ -29,7 +29,7 @@ public class IndexItemClickListener extends SimpleClickListener {
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         GoodsDetailDelegate detailDelegate = new GoodsDetailDelegate();
-        DELEGATE.getSupportDelegate().start(detailDelegate);
+        DELEGATE.getParentDelegate().getSupportDelegate().start(detailDelegate);
     }
 
     @Override

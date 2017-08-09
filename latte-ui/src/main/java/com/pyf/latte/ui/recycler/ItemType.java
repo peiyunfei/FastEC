@@ -26,4 +26,8 @@ public class ItemType {
     public static final int ITEM_ADDRESS = 10;
     // 消息推送
     public static final int ITEM_SWITCH = 11;
+    // 搜索
+    public static final int ITEM_NET_SEARCH = 12;
+    // 搜索
+    public static final int ITEM_SEARCH_RECORD = 13;
 }

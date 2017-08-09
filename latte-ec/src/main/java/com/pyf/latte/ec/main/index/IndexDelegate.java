@@ -16,6 +16,7 @@ import com.pyf.latte.delegate.bottom.BottomItemDelegate;
 import com.pyf.latte.ec.R;
 import com.pyf.latte.ec.R2;
 import com.pyf.latte.ec.main.EcBottomDelegate;
+import com.pyf.latte.ec.main.index.search.SearchDelegate;
 import com.pyf.latte.net.RestCreator;
 import com.pyf.latte.net.rx.RxRestClient;
 import com.pyf.latte.ui.recycler.BaseDecoration;
@@ -38,7 +39,7 @@ import io.reactivex.schedulers.Schedulers;
  * <br/>
  * 时间：2017/7/14
  */
-public class IndexDelegate extends BottomItemDelegate {
+public class IndexDelegate extends BottomItemDelegate implements View.OnFocusChangeListener {
 
     @BindView(R2.id.srl_index)
     SwipeRefreshLayout mRefreshLayout;
@@ -88,6 +89,7 @@ public class IndexDelegate extends BottomItemDelegate {
     public void onBindView(Bundle savedInstanceState, View rootView) {
         mRefreshHandler = RefreshHandler.create(getContext(), mRefreshLayout,
                 mRvIndex, new IndexDataConverter());
+        mEtSearch.setOnFocusChangeListener(this);
         //        testRxJava2();
     }
 
@@ -154,5 +156,12 @@ public class IndexDelegate extends BottomItemDelegate {
     @Override
     public Object setLayout() {
         return R.layout.delegate_index;
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if (hasFocus) {
+            getParentDelegate().getSupportDelegate().start(new SearchDelegate());
+        }
     }
 }
