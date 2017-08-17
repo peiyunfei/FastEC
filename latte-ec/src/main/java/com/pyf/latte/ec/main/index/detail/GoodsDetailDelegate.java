@@ -18,10 +18,6 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  */
 public class GoodsDetailDelegate extends LatteDelegate {
 
-    public static GoodsDetailDelegate create() {
-        return new GoodsDetailDelegate();
-    }
-
     @Override
     public void onBindView(Bundle savedInstanceState, View rootView) {
 
