@@ -30,4 +30,6 @@ public class ItemType {
     public static final int ITEM_NET_SEARCH = 12;
     // 搜索
     public static final int ITEM_SEARCH_RECORD = 13;
+    // 商品详情的图片
+    public static final int ITEM_IMAGE = 14;
 }

@@ -6,6 +6,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.SimpleClickListener;
 import com.pyf.latte.delegate.LatteDelegate;
 import com.pyf.latte.ec.main.index.detail.GoodsDetailDelegate;
+import com.pyf.latte.ui.recycler.MultipleFields;
+import com.pyf.latte.ui.recycler.MultipleItemEntity;
 
 /**
  * 首页点击事件
@@ -28,8 +30,9 @@ public class IndexItemClickListener extends SimpleClickListener {
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        GoodsDetailDelegate detailDelegate = new GoodsDetailDelegate();
-        DELEGATE.getSupportDelegate().start(detailDelegate);
+        MultipleItemEntity entity = (MultipleItemEntity) adapter.getData().get(position);
+        GoodsDetailDelegate delegate = GoodsDetailDelegate.create((Integer) entity.getField(MultipleFields.ID));
+        DELEGATE.getSupportDelegate().start(delegate);
     }
 
     @Override

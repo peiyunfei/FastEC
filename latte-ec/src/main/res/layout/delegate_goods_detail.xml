@@ -27,7 +27,7 @@
                     <com.bigkoo.convenientbanner.ConvenientBanner
                         android:id="@+id/detail_banner"
                         android:layout_width="match_parent"
-                        android:layout_height="260dp" />
+                        android:layout_height="260dp"/>
 
                     <android.support.v7.widget.ContentFrameLayout
                         android:id="@+id/frame_goods_info"
@@ -37,9 +37,11 @@
                 </RelativeLayout>
 
                 <android.support.v7.widget.Toolbar
+                    android:id="@+id/tb_goods_detail"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
+                    android:layout_height="?android:attr/actionBarSize"
+                    android:layout_marginTop="10dp"
+                    app:layout_collapseMode="pin">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -69,7 +71,7 @@
             <android.support.design.widget.TabLayout
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize" />
+                android:layout_height="?android:attr/actionBarSize"/>
 
         </android.support.design.widget.AppBarLayout>
 

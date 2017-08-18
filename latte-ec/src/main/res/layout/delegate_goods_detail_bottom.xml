@@ -15,7 +15,6 @@
         android:paddingBottom="5dp">
 
         <com.joanzapata.iconify.widget.IconTextView
-            android:id="@+id/icon_favor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
