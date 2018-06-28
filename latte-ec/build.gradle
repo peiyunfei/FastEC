@@ -3,12 +3,12 @@ apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'org.greenrobot.greendao'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
 
@@ -25,7 +25,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     // 圆形图片
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile project(':latte-ui')
